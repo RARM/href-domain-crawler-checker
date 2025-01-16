@@ -50,10 +50,29 @@ def save_links_to_csv(links, csv_file):
 # Main function
 def main():
     # Parse the command-line arguments
-    parser = argparse.ArgumentParser()
-    parser.add_argument('xml_file', help='Path to the XML file')
-    parser.add_argument('domain', help='Target domain (e.g., example.com)')
-    parser.add_argument('-t', '--threads', type=int, default=8, help='Number of threads to use (default: 8)')
+    parser = argparse.ArgumentParser(
+        description="Crawl a sitemap and extract links to a specific domain.",
+        formatter_class=argparse.RawTextHelpFormatter
+    )
+    parser.add_argument(
+        'xml_file', 
+        help='Path to the XML sitemap file.'
+    )
+    parser.add_argument(
+        'domain', 
+        help='''Target domain to search for links. 
+Can be a simple domain (e.g., example.com) 
+or a more complex pattern.'''
+    )
+    parser.add_argument(
+        '-t', '--threads', 
+        type=int, 
+        default=8, 
+        help='''Number of threads to use for crawling. 
+Increasing threads can speed up the process, 
+but using too many may overload the server.
+(default: 8)'''
+    )
     args = parser.parse_args()
 
     # Extract URLs from the XML file
